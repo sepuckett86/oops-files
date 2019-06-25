@@ -4,7 +4,7 @@
 
 1. Determine what information your friend can give you to solve the problem
       * Assume that they can give you the directory name **OR** that you can put your code inside their directory **OR** they give you a folder with the files. The last way is the easiest, so say you are given a folder of unknown files names.
-1. Set up a basic file structure with index.js and index.test.js
+1. Set up a separate directory with basic file structure: index.js and index.test.js
 1. Write tests that do the following:
       * beforeEach: write a few files
       * afterEach: delete those files
@@ -15,3 +15,6 @@
       * renames a file with a function and removes that file
 1. Write functions for all of the tests to pass tests
 1. Write a function that incorporates the other functions and loops through all files in a directory to rename them
+      * args: (fileDirectoryPath)
+      * output: none, but changes all files in the folder to desired format
+1. Make a folder of a few test files and run the function, inputting the directory name, and see confirm that it works
