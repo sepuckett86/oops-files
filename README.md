@@ -17,4 +17,4 @@
 1. Write a function that incorporates the other functions and loops through all files in a directory to rename them
       * args: (fileDirectoryPath)
       * output: none, but changes all files in the folder to desired format
-1. Make a folder of a few test files and run the function, inputting the directory name, and see confirm that it works
+1. Make a folder of a few test files and run the function, inputting the directory name, and confirm that it works
