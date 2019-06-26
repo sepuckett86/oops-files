@@ -38,13 +38,15 @@ describe('file methods', () => {
     })
 
     it('renames file', done => {
-      fs.readFile('./fixtures/1.txt', (err, data) => {
+      fs.readFile('1.txt', { encoding: 'utf8' }, (err, data) => {
         const oldFileContent = data;
         renameFile('1.txt', 'done.txt', (err) => {
-          fs.readFile('done.txt', (err, data) => {
+          fs.readFile('done.txt', { encoding: 'utf8' }, (err, data) => {
             const newFileContent = data;
-            expect(oldFileContent).toEqual(newFileContent);
-            done(err);
+            expect(newFileContent).toEqual(oldFileContent);
+            renameFile('done.txt', '1.txt', (err) => {
+              done(err);
+            })
           })
         })
       })

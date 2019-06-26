@@ -25,8 +25,9 @@ function readDirectory(directoryPath, callback) {
 }
 
 function renameFile(oldFilePath, newFilePath, callback) {
-  // finish later
-  callback();
+  fs.rename(oldFilePath, newFilePath, err => {
+    callback(err);
+  });
 }
 
 function makeFiles(directoryName, numberOfFiles, callback) {
