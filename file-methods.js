@@ -11,8 +11,18 @@ function makeFiles(directoryName, numberOfFiles, callback) {
   let writtenSoFar = 0
   for(let i = 0; i < numberOfFiles; i++) {
     const fileName = i;
-    const data = 'sloth';
-    fs.writeFile(`./${directoryName}/${fileName}.txt`, data, err => {
+
+    const animals = [
+      'sloth', 
+      'manatee',
+      'meerkat',
+      'sea-turtle',
+      'lemur'
+    ];
+
+    const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+
+    fs.writeFile(`./${directoryName}/${fileName}.txt`, randomAnimal, err => {
       if(err) console.error(err);
 
       writtenSoFar++;
