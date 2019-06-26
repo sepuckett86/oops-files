@@ -9,7 +9,7 @@ function getFileContent(filePath, callback) {
 
 function getDateModified(filePath, callback) {
   fs.stat(filePath, (err, stats) => {
-    const mtime = stats.mtime;
+    const mtime = stats.mtime.toISOString();
     if(err) console.error(err);
     callback(err, mtime);
   });
@@ -20,6 +20,11 @@ function readDirectory(directoryPath, callback) {
     if(err) console.error(err);
     callback(err, data);
   })
+}
+
+function renameFile(oldFilePath, newFilePath, callback) {
+  // finish later
+  callback();
 }
 
 function makeFiles(directoryName, numberOfFiles, callback) {
@@ -51,5 +56,6 @@ module.exports = {
   getFileContent,
   makeFiles,
   getDateModified,
-  readDirectory
+  readDirectory,
+  renameFile
 }

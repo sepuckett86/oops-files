@@ -3,7 +3,8 @@ const {
   getFileContent, 
   makeFiles,
   getDateModified,
-  readDirectory
+  readDirectory,
+  renameFile
 } = require('./file-methods');
 
 describe('file methods', () => {
@@ -30,10 +31,23 @@ describe('file methods', () => {
     it('gets date modified of file', done => {
       const file = '1.txt';
       const result = getDateModified(file, (err, data) => {
-        // expect data to be a string
-        console.log(data);
+        expect(err).toBeFalsy();
+        expect(data).toEqual(expect.any(String));
         done(err);
       });
+    })
+
+    it('renames file', done => {
+      fs.readFile('./fixtures/1.txt', (err, data) => {
+        const oldFileContent = data;
+        renameFile('1.txt', 'done.txt', (err) => {
+          fs.readFile('done.txt', (err, data) => {
+            const newFileContent = data;
+            expect(oldFileContent).toEqual(newFileContent);
+            done(err);
+          })
+        })
+      })
     })
   })
 
@@ -71,6 +85,7 @@ describe('file methods', () => {
     beforeEach(done => {
       makeFiles('fixtures', 10, done);
     })
+
     afterEach(done => {
       fs.readdir('./fixtures', (err, files) => {
         if(files.length === 0) done(err);
