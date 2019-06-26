@@ -12,7 +12,9 @@ describe('file methods', () => {
     fs.unlink(dest, done);
   })
   
-  it('passes', () => {
-    // dummy test
+  it('gets content of file', () => {
+    const file = '1.txt';
+    const result = getFileContent(file);
+    expect(result).toBe('shade');
   })
 })
