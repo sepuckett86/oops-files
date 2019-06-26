@@ -1,8 +1,13 @@
 const fs = require('fs');
-const { getFileContent, makeFiles } = require('./file-methods');
+const { 
+  getFileContent, 
+  makeFiles,
+  getDateModified,
+  readDirectory
+} = require('./file-methods');
 
 describe('file methods', () => {
-  describe('getFileContent', () => {
+  describe('single file methods', () => {
     beforeEach(done => {
       const dest = '1.txt';
       const content = 'shade';
@@ -21,21 +26,31 @@ describe('file methods', () => {
         done(err);
       });
     })
+
+    it('gets date modified of file', done => {
+      const file = '1.txt';
+      const result = getDateModified(file, (err, data) => {
+        // expect data to be a string
+        console.log(data);
+        done(err);
+      });
+    })
   })
 
   describe('makeFiles', () => {
     afterEach(done => {
       fs.readdir('./fixtures', (err, files) => {
+        if(files.length === 0) done(err);
         let unlinkedSoFar = 0;
         files.forEach(file => {
           fs.unlink('./fixtures/' + file, err => {
+            if(err) return done(err);
             unlinkedSoFar++;
             if(unlinkedSoFar === files.length) {
-              done(err);
+              done();
             }
           })
         })
-        done(err);
       });
     })
 
@@ -48,6 +63,35 @@ describe('file methods', () => {
           expect(files).toHaveLength(numberOfFiles);
           done(err);
         });
+      })
+    })
+  })
+
+  describe('readDirectory', () => {
+    beforeEach(done => {
+      makeFiles('fixtures', 10, done);
+    })
+    afterEach(done => {
+      fs.readdir('./fixtures', (err, files) => {
+        if(files.length === 0) done(err);
+        let unlinkedSoFar = 0;
+        files.forEach(file => {
+          fs.unlink('./fixtures/' + file, err => {
+            if(err) return done(err);
+            unlinkedSoFar++;
+            if(unlinkedSoFar === files.length) {
+              done();
+            }
+          })
+        })
+      });
+    })
+
+    it('returns an array of files in a directory', done => {
+      readDirectory('fixtures', (err, data) => {
+        if(err) return done(err);
+        expect(data).toHaveLength(10);
+        done();
       })
     })
   })

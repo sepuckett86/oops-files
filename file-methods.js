@@ -1,17 +1,29 @@
 const fs = require('fs');
 
-function getFileContent(fileName, callback) {
-  fs.readFile(fileName, { encoding: 'utf8'}, (err, data) => {
+function getFileContent(filePath, callback) {
+  fs.readFile(filePath, { encoding: 'utf8'}, (err, data) => {
     if(err) console.error(err);
     callback(err, data);
   })
+}
+
+function getDateModified(filePath, callback) {
+  fs.stat(filePath, (err, stats) => {
+    const mtime = stats.mtime;
+    if(err) console.error(err);
+    callback(err, mtime);
+  });
+}
+
+function readDirectory(directoryPath, callback) {
+  // finish later
+  callback();
 }
 
 function makeFiles(directoryName, numberOfFiles, callback) {
   let writtenSoFar = 0
   for(let i = 0; i < numberOfFiles; i++) {
     const fileName = i;
-
     const animals = [
       'sloth', 
       'manatee',
@@ -19,12 +31,10 @@ function makeFiles(directoryName, numberOfFiles, callback) {
       'sea-turtle',
       'lemur'
     ];
-
     const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
 
     fs.writeFile(`./${directoryName}/${fileName}.txt`, randomAnimal, err => {
       if(err) console.error(err);
-
       writtenSoFar++;
 
       // call callback at the end
@@ -37,5 +47,7 @@ function makeFiles(directoryName, numberOfFiles, callback) {
 
 module.exports = {
   getFileContent,
-  makeFiles
+  makeFiles,
+  getDateModified,
+  readDirectory
 }
