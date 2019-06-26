@@ -7,6 +7,25 @@ function getFileContent(fileName, callback) {
   })
 }
 
+function makeFiles(directoryName, numberOfFiles, callback) {
+  let writtenSoFar = 0
+  for(let i = 0; i < numberOfFiles; i++) {
+    const fileName = i;
+    const data = 'sloth';
+    fs.writeFile(`./${directoryName}/${fileName}.txt`, data, err => {
+      if(err) console.error(err);
+
+      writtenSoFar++;
+
+      // call callback at the end
+      if(writtenSoFar === numberOfFiles) {
+        callback(err);
+      }
+    })
+  }
+}
+
 module.exports = {
-  getFileContent
+  getFileContent,
+  makeFiles
 }
