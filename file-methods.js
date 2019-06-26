@@ -16,8 +16,10 @@ function getDateModified(filePath, callback) {
 }
 
 function readDirectory(directoryPath, callback) {
-  // finish later
-  callback();
+  fs.readdir('fixtures', (err, data) => {
+    if(err) console.error(err);
+    callback(err, data);
+  })
 }
 
 function makeFiles(directoryName, numberOfFiles, callback) {
