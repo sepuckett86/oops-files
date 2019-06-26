@@ -44,6 +44,7 @@ describe('file methods', () => {
           fs.readFile('done.txt', { encoding: 'utf8' }, (err, data) => {
             const newFileContent = data;
             expect(newFileContent).toEqual(oldFileContent);
+            // For clean up purposes: 
             renameFile('done.txt', '1.txt', (err) => {
               done(err);
             })

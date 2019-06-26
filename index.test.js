@@ -1,11 +1,17 @@
+const fs = require('fs');
+const { 
+  makeFiles
+} = require('./file-methods');
+
 describe('index', () => {
   beforeEach(() => {
-    // make directory with multiple files
+    // fill fixtures with multiple files
   })
   afterEach(() => {
-    // delete directory of files
+    // delete files, regardless of name, in fixtures
   })
-  it('passes', () => {
-    // dummy test
+  it('renames all files', () => {
+    // check for length of file array to be the same
+    // BONUS: check that name is correct using REGEX
   })
 })
