@@ -9,10 +9,11 @@ function getFileContent(filePath, callback) {
 
 function getDateModified(filePath, callback) {
   fs.stat(filePath, (err, stats) => {
-    if(!stats) return callback(err);
-    const mtime = stats.mtime.toISOString();
-    if(err) console.error(err);
-    callback(err, mtime);
+    // short circuit
+    // if first is true, evaluates and returns second
+    // if first is false, returns first and never evaluates second
+    // false && true
+    callback(err, stats && stats.mtime.toISOString());
   });
 }
 
