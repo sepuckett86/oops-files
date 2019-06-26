@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { getFileContent } = require('./file-methods');
 
 describe('file methods', () => {
   beforeEach(done => {
@@ -12,9 +13,11 @@ describe('file methods', () => {
     fs.unlink(dest, done);
   })
   
-  it('gets content of file', () => {
+  it('gets content of file', done => {
     const file = '1.txt';
-    const result = getFileContent(file);
-    expect(result).toBe('shade');
+    const result = getFileContent(file, (err, data) => {
+      expect(data).toBe('shade');
+      done(err);
+    });
   })
 })
