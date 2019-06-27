@@ -11,9 +11,11 @@ describe('file methods', () => {
   beforeAll(done => {
     fs.mkdir('./fixtures', done);
   })
+  
   afterAll(done => {
     fs.rmdir('./fixtures', done);
   })
+
   describe('single file methods', () => {
     beforeEach(done => {
       const dest = '1.txt';
