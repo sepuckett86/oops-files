@@ -4,14 +4,15 @@ const {
   makeFiles,
   getDateModified,
   readDirectory,
-  renameFile
+  renameFile,
+  deleteFiles
 } = require('./file-methods');
 
 describe('file methods', () => {
   beforeAll(done => {
     fs.mkdir('./fixtures', done);
   })
-  
+
   afterAll(done => {
     fs.rmdir('./fixtures', done);
   })
@@ -86,6 +87,24 @@ describe('file methods', () => {
         expect(err).toBeFalsy();
         fs.readdir(directoryName, (err, files) => {
           expect(files).toHaveLength(numberOfFiles);
+          done(err);
+        });
+      })
+    })
+  })
+
+  describe('deleteFiles', () => {
+    beforeEach(done => {
+      makeFiles('fixtures', 10, done);
+    })
+
+    it('deletes all files in a directory', done => {
+      const directoryName = 'fixtures';
+
+      deleteFiles(directoryName, (err) => {
+        expect(err).toBeFalsy();
+        fs.readdir(directoryName, (err, files) => {
+          expect(files).toHaveLength(0);
           done(err);
         });
       })
