@@ -1,8 +1,10 @@
 const fs = require('fs');
 const { 
   makeFiles,
-  deleteFiles
+  deleteFiles,
+  readDirectory
 } = require('./file-methods');
+const renameAllFiles = require('./index');
 
 describe('index', () => {
   beforeAll(done => {
@@ -21,8 +23,19 @@ describe('index', () => {
     deleteFiles('fixtures', done);
   })
 
-  it('renames all files', () => {
-    // check for length of file array to be the same
+  it('renames all files', done => {
+    readDirectory('fixtures', (err, data) => {
+      if(err) done(err);
+      const originalLength = data.length;
+      // check for length of file array to be the same
+      renameAllFiles('fixtures', (err) => {
+        if(err) done(err);
+        readDirectory('fixtures', (err, data) => {
+          expect(data).toHaveLength(originalLength);
+          done(err);
+        })
+      })
+    })
     // BONUS: check that name is correct using REGEX
   })
 })

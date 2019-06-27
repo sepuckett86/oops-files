@@ -18,6 +18,4 @@ function renameAllFiles(directory, callback) {
   callback();
 }
 
-module.exports = {
-  renameAllFiles
-}
+module.exports = renameAllFiles;
