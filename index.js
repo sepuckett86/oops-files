@@ -20,18 +20,20 @@ function renameAllFiles(directory, callback) {
         const content = data;
         getDateModified(`fixtures/${file}`, (err, data) => {
           if(err) return callback(err);
+          // get date modified
           const dateModified = data;
           //
           const fileName = file.slice(0, -4);
           const newName = `${content}-${fileName}-${dateModified}`;
-          console.log(newName);
+          // rename file
+          renameFile(`fixtures/${file}`, `fixtures/${newName}`, (err) => {
+            if(err) return callback(err);
+            count++;
+            if(count === files.length) callback(err);
+          })
 
-          count++;
-          if(count === files.length) callback(err);
         })
       });
-      // get date modified
-      // make new file with same content and new file name
       // delete old file
       // when the last file is done, invoke callback
 

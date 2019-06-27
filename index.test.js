@@ -11,12 +11,12 @@ describe('index', () => {
     fs.mkdir('./fixtures', done);
   })
   
-  afterAll(done => {
-    fs.rmdir('./fixtures', done);
-  })
-
   beforeEach(done => {
     makeFiles('fixtures', 10, done);
+  })
+
+  afterAll(done => {
+    fs.rmdir('./fixtures', done);
   })
 
   afterEach(done => {
