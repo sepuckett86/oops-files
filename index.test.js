@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { 
-  makeFiles
+  makeFiles,
+  deleteFiles
 } = require('./file-methods');
 
 describe('index', () => {
@@ -17,21 +18,9 @@ describe('index', () => {
   })
 
   afterEach(done => {
-    fs.readdir('./fixtures', (err, files) => {
-      if(files.length === 0) done(err);
-      let unlinkedSoFar = 0;
-      files.forEach(file => {
-        fs.unlink('./fixtures/' + file, err => {
-          if(err) return done(err);
-          unlinkedSoFar++;
-          if(unlinkedSoFar === files.length) {
-            done();
-          }
-        })
-      })
-    });
+    deleteFiles('fixtures', done);
   })
-  
+
   it('renames all files', () => {
     // check for length of file array to be the same
     // BONUS: check that name is correct using REGEX
