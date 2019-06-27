@@ -1,5 +1,8 @@
 # oops-files
 
+## Overall Goal
+Rename all files in a given directory with content of file, number in file name, and date modified.
+
 ## Steps
 
 1. Determine what information your friend can give you to solve the problem
@@ -8,6 +11,7 @@
 1. Write tests that do the following:
       * beforeEach: write a few files
       * afterEach: delete those files
+      * make a large number of files in a directory for testing purposes
       * get the names of all the files in a directory
       * get the name of a file with a function
       * get the content of a file with a function
