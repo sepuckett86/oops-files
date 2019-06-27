@@ -1,10 +1,7 @@
 const fs = require('fs');
 
 function getFileContent(filePath, callback) {
-  fs.readFile(filePath, { encoding: 'utf8'}, (err, data) => {
-    if(err) console.error(err);
-    callback(err, data);
-  })
+  fs.readFile(filePath, { encoding: 'utf8'}, callback)
 }
 
 function getDateModified(filePath, callback) {
@@ -18,10 +15,7 @@ function getDateModified(filePath, callback) {
 }
 
 function readDirectory(directoryPath, callback) {
-  fs.readdir('fixtures', (err, data) => {
-    if(err) console.error(err);
-    callback(err, data);
-  })
+  fs.readdir('fixtures', callback)
 }
 
 function renameFile(oldFilePath, newFilePath, callback) {
